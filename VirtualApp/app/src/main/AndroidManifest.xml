@@ -26,10 +26,6 @@
             android:value="com.android.support:design:25.4.0"
             tools:replace="android:value" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="797c6ad1f87c908a4d7f6e8091e6466848b1611d" />
-
         <activity
             android:name=".splash.SplashActivity"
             android:screenOrientation="portrait"
@@ -91,7 +87,7 @@
             android:excludeFromRecents="true"
             android:label="@string/shared_to_vxp"
             android:screenOrientation="portrait"
-            android:taskAffinity="io.va.exposed.share"
+            android:taskAffinity="${applicationId}.share"
             android:theme="@style/Theme.AppCompat.Light.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -109,7 +105,7 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_installer_label"
             android:noHistory="true"
-            android:taskAffinity="io.va.exposed.installer"
+            android:taskAffinity="${applicationId}.installer"
             android:theme="@style/Theme.AppCompat.Light" />
 
         <activity-alias
@@ -161,7 +157,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="io.va.exposed.CMD" />
+                <action android:name="${applicationId}.CMD" />
             </intent-filter>
         </receiver>
     </application>

@@ -181,6 +181,12 @@ public class AppRepository implements AppDataSource {
             }
             ApplicationInfo ai = pkg.applicationInfo;
             String path = ai.publicSourceDir != null ? ai.publicSourceDir : ai.sourceDir;
+            boolean splitApk = false;
+            if (ai.splitPublicSourceDirs != null || ai.splitSourceDirs != null) {
+                splitApk = true;
+                path = new File(path).getParent();
+            }
+
             if (path == null) {
                 continue;
             }
@@ -188,10 +194,10 @@ public class AppRepository implements AppDataSource {
             info.packageName = pkg.packageName;
             info.fastOpen = fastOpen;
             info.path = path;
-//            info.icon = ai.loadIcon(pm);
             info.icon = null;  // Use Glide to load the icon async
             info.name = ai.loadLabel(pm);
             info.version = pkg.versionName;
+            info.splitApk = splitApk;
             InstalledAppInfo installedAppInfo = VirtualCore.get().getInstalledAppInfo(pkg.packageName, 0);
             if (installedAppInfo != null) {
                 info.cloneCount = installedAppInfo.getInstalledUsers().length;
